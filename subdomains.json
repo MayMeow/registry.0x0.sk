@@ -1,9 +1,11 @@
 {
     "subdomains": [
         "195417e5c7caf6e66459322a7f6c05c009e2b1c01ee5d6150b4ebdeeb8f69491",
+        "54c2fac0f2c905c2359cd448477a8887f3bf31fa606327861591e41688cb1256",
         "65188d4796173c97fdb34fe1a4e8ff2b7ce674892681bee4be4a33ff62ed48e1",
         "1481b3a8675d3d1255a63f41759db6ddc3fd6fd7006b727b7621849dd5fc6c91",
         "ems.0x0.sk",
+        "martin.0x0.sk",
         "meow.0x0.sk",
         "registry.0x0.sk"
     ]
