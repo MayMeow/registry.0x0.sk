@@ -1,0 +1,16 @@
+{
+  "name": "registry-0x0-sk",
+  "version": "1.0.0",
+  "description": "Brutalist registry of 0x0.sk subdomains built with Eleventy.",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "vitest": "^1.4.0"
+  },
+  "license": "MIT"
+}

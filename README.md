@@ -37,7 +37,7 @@ Subdomains can be used for **Bluesky handles**. (for now), considering allowing 
 ```python
 import idna
 domain_unicode = "🐱.0x0.sk"
-domain_puny = idna.encode(domain_unicode).decode('ascii')  # xn--e28h.0x0.sk
+domain_puny = idna.encode(domain_unicode).decode('ascii')  # xn--5o8h.0x0.sk
 ```
 
 💡 You can also write your domain name in your address bar - most browsers will translate it to punnycode.
@@ -47,3 +47,25 @@ domain_puny = idna.encode(domain_unicode).decode('ascii')  # xn--e28h.0x0.sk
 * Never commit **private salts** or **personal info**.
 * Hidden hashes protect reserved/premium domains from being scraped.
 * PRs adding new subdomains without prior confirmation will **not** be merged.
+
+## Development
+
+1. `npm install`
+2. `npm run dev` — launches Eleventy with hot reload at <http://localhost:8080>
+3. `npm run build` — produces the static site in `_site/`
+4. `npm test` — runs the Vitest suite that validates domain normalization/hashing helpers and enforces the `subdomains.json` schema (hashes or punycode FQDNs only)
+
+Every pull request runs the same `npm test` + `npm run build` pipeline through GitHub Actions (`.github/workflows/ci.yml`).
+
+## Domain search logic
+
+The web UI normalizes user input by trimming whitespace, lowercasing ASCII, auto-appending `.0x0.sk`, and converting emoji labels to punycode (using the browser’s URL parser). It then checks entries in `subdomains.json` two ways:
+
+1. direct string comparison for any visible domain (e.g., `meow.0x0.sk`)
+2. SHA‑256 digest comparison for hashed/hidden reservations
+
+If either check matches, the domain is reported as taken without revealing private names.
+
+## Deployment
+
+Vercel builds the site with `npm run build` and serves the generated `_site` directory (see `vercel.json`). No server-side code is required; all availability checks happen client-side.

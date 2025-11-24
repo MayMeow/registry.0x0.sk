@@ -1,0 +1,66 @@
+---
+layout: layout.njk
+title: registry.0x0.sk — brutalist ledger
+---
+<section class="hero">
+  <div>
+    <h2>Claim your slice of the void</h2>
+    <p>
+      This ledger lists every assigned <strong>0x0.sk</strong> subdomain. Some
+      records stay private through SHA-256 hashes, but availability is always
+      transparent.
+    </p>
+  </div>
+  <div class="hero__cta">
+    <p>Need one? Reach out via <a href="https://ko-fi.com/D1D5DMOTA">Ko-fi</a>.</p>
+    <p class="note">Emoji welcome. Private picks stay hashed.</p>
+  </div>
+</section>
+
+<section class="search" aria-labelledby="search-title">
+  <div>
+    <h3 id="search-title">Is your subdomain free?</h3>
+    <p>
+      Type a name, hit enter, and we will cross-check both raw and hashed
+      records—no toggles, no fuss.
+    </p>
+  </div>
+  <form id="search-form" novalidate>
+    <label for="query">subdomain</label>
+    <div class="input-row">
+      <input
+        id="query"
+        name="query"
+        type="text"
+        placeholder="meow"
+        autocomplete="off"
+        spellcheck="false"
+        required
+      />
+      <button type="submit">check</button>
+    </div>
+    <p class="hint">We normalize emoji → punycode and auto-append .0x0.sk.</p>
+  </form>
+</section>
+
+<section class="result" aria-live="polite">
+  <div id="result-card" class="card">
+    <p class="status muted">Start typing to see availability.</p>
+  </div>
+</section>
+
+<section class="ledger" aria-label="Known registrations">
+  <header>
+    <h3>Visible subdomains</h3>
+    <p>Hashes stay hidden, but these entries are public.</p>
+  </header>
+  <ul class="grid">
+    {% for domain in subdomains %}
+      {% if "." in domain %}
+        <li>{{ domain }}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+
+<script id="subdomain-data" type="application/json">{{ subdomains | dump | safe }}</script>
